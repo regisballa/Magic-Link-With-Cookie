@@ -1,9 +1,8 @@
 <script>
     import { enhance } from '$app/forms';
 
-    export let form;
-
-    let loading = false;
+    let { form } = $props();
+    let loading = $state(false);
 </script>
 
 <div class="min-h-screen flex items-center justify-center bg-neutral-50 px-4">
