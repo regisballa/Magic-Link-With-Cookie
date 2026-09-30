@@ -3,6 +3,7 @@ import { fail } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 import { findUserByEmail, createMagicLink, invalidateMagicLinks } from '$lib/server/auth.js';
 import { sendLoginMail } from '$lib/server/mail.js';
+import { checkRateLimit } from '$lib/server/ratelimit.js';
 
 export function load({ locals }) {
     // Wer schon eingeloggt ist, braucht keinen Login
@@ -16,6 +17,11 @@ export const actions = {
 
         if (!email.includes('@')) {
             return fail(400, { error: 'Bitte gib eine gültige E-Mail-Adresse ein.' });
+        }
+
+        // Nicht mehr als 3 Anfragen pro Adresse in 15 Minuten
+        if (!checkRateLimit(email)) {
+            return fail(429, { error: 'Zu viele Versuche. Bitte warte 15 Minuten.' });
         }
 
         const user = await findUserByEmail(email);
