@@ -1,5 +1,8 @@
 // Läuft bei jedem Request, bevor die Seite geladen wird
 import { validateSession } from '$lib/server/auth.js';
+import { startCleanup } from '$lib/server/cleanup.js';
+
+startCleanup(); // Cleanup beim Serverstart starten
 
 export async function handle({ event, resolve }) {
     // Session-ID aus dem Cookie lesen
