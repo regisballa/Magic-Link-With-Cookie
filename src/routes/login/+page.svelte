@@ -1,5 +1,6 @@
 <script>
     import { enhance } from '$app/forms';
+    import { page } from '$app/state';
 
     let { form } = $props();
     let loading = $state(false);
@@ -20,6 +21,12 @@
             <p class="mt-2 text-sm text-neutral-500">
                 Kein Passwort nötig. Wir schicken dir einen Link per Mail.
             </p>
+
+            {#if page.url.searchParams.get('error') === 'invalid'}
+                <p class="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+                    Der Link ist abgelaufen oder wurde schon benutzt. Fordere einen neuen an.
+                </p>
+            {/if}
 
             <form
                 method="POST"
