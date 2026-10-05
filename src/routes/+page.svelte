@@ -1,18 +1,23 @@
 <script>
+    // data kommt vom Server (+page.server.js) und sagt, ob jemand eingeloggt ist
     let { data } = $props();
 </script>
 
+<!-- Ganze Seite: Inhalt in der Mitte, heller Hintergrund -->
 <div class="min-h-screen flex items-center justify-center bg-neutral-50 px-4">
     <div class="w-full max-w-md text-center">
+        <!-- Titel der Startseite -->
         <h1 class="text-3xl font-semibold tracking-tight text-neutral-900">
             Magic Link Login
         </h1>
+        <!-- Kurze Erklärung, wie der Login funktioniert -->
         <p class="mt-3 text-sm text-neutral-500">
             Login ohne Passwort. Du gibst deine E-Mail ein, wir schicken dir einen Link,
             und der Klick darauf meldet dich an.
         </p>
 
         <div class="mt-8 flex justify-center gap-3">
+            <!-- Ist der User eingeloggt, zeigen wir nur den Button zum Dashboard -->
             {#if data.user}
                 <a
                     href="/dashboard"
@@ -22,6 +27,7 @@
                     Zum Dashboard
                 </a>
             {:else}
+                <!-- Sonst zeigen wir Einloggen und Konto erstellen -->
                 <a
                     href="/login"
                     class="rounded-lg bg-neutral-900 px-4 py-2.5 text-sm font-medium
