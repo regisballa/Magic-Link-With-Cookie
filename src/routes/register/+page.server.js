@@ -15,7 +15,7 @@ export const actions = {
         const name = String(data.get('name') ?? '').trim();
 
         if (!email.includes('@') || name.length < 2) {
-            return fail(400, { error: 'Bitte Name und gültige E-Mail eingeben.' }
+            return fail(400, { error: 'Bitte Name und gültige E-Mail eingeben.' })
         }
 
         const existing = await findUserByEmail(email);

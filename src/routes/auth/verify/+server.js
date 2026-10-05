@@ -28,7 +28,7 @@ export async function GET({ url, cookies }) {
     // Cookie mit der Session-ID im Browser setzen
     cookies.set('session', sessionId, {
         path: '/',          // Das Cookie gilt für die ganze Website
-        httpOnly: tru,     // JavaScript kann es nicht lesen, schützt vor XSS
+        httpOnly: true,     // JavaScript kann es nicht lesen, schützt vor XSS
         secure: !dev,       // Nur über HTTPS senden, lokal ist es aus
         sameSite: 'lax',    // Wird nicht von fremden Seiten mitgeschickt, schützt vor CSRF
         maxAge: 60 * 60 * 24 * 7  // Lebensdauer in Sekunden: 7 Tage
